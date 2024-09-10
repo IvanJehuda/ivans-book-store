@@ -78,7 +78,7 @@ Kelas : PBP E
 
 ### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
 
-![Django Flow Chart](chart/django_chart.png)
+![Django Flow Chart](django_chart.png)
 
 
 ### Fungsi git dalam pengembangan perangkat lunak
