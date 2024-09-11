@@ -8,24 +8,24 @@ Kelas : PBP E
 
 
 ## Questions
-### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+### Step by step pembuatan Ivan's Book Store
 
 1. Membuat direktori baru dengan nama `ivans-book-store`.
 
 2. Membuat dan mengaktifkan virtual environment pada direktori tersebut dengan:
     ```
-        python -m venv env
-        env\Scripts\activate
+    python -m venv env
+    env\Scripts\activate
     ```
 
 3. Membuat berkas reqirements berisikan :
     ```
-        django
-        gunicorn
-        whitenoise
-        psycopg2-binary
-        requests
-        urllib3
+    django
+    gunicorn
+    whitenoise
+    psycopg2-binary
+    requests
+    urllib3
     ```
     dan menginstal dependencies tersebut dengan perintah `pip install -r requirements.txt`
 4. Menginisiasi proyek django baru dengan perintah
@@ -36,13 +36,13 @@ Kelas : PBP E
 
 6. Membuat berkas template dalam main dan mengisinya dengan 
     ```
-        <h1>Ivan's Book Store</h1>
-        <h5>NPM: </h5>
-        <p>{{ npm }}<p>
-        <h5>Name: </h5>
-        <p>{{ name }}<p>
-        <h5>Class: </h5>
-        <p>{{ class }}<p>
+    <h1>Ivan's Book Store</h1>
+    <h5>NPM: </h5>
+    <p>{{ npm }}<p>
+    <h5>Name: </h5>
+    <p>{{ name }}<p>
+    <h5>Class: </h5>
+    <p>{{ class }}<p>
     ```
 7. Membuat model product dengan memodifikasi berkas models.py dengan 
     ```
@@ -55,16 +55,14 @@ Kelas : PBP E
         genre = models.CharField(max_length=255)
     ```
 8. Menambahkan routing untuk menghubungkan `views.py` di `main` pada `urls.py`:
-        ```python
-        from django.urls import path
-        from main.views import show_main
+    ```python
+    from django.urls import path
+    from main.views import show_main
 
-        app_name = 'main'
+    app_name = 'main'
 
-        urlpatterns = [
-            path('', show_main, name='show_main'),
-        ]
-        ```
+    urlpatterns = [ path('', show_main, name='show_main'),]
+    ```
 9. Mengkofigurasi routing url proyeng dengan memodifikasi berkas urls.py dalam direktori ivans_book_store dengan :
     ```
     urlpatterns = [
@@ -91,8 +89,8 @@ Kelas : PBP E
 4. Memudahkan deployment dengan adanya fungsi pull serta push.
 
 
-### Alasan Django dijadikan sebagai framewrok pembelajaran
-1. Mnyediakan banyak fitur bawaan yang memudahkan pengembangan aplikasi web.
+### Alasan Django dijadikan sebagai framework pembelajaran
+1. Menyediakan banyak fitur bawaan yang memudahkan pengembangan aplikasi web.
 2. Memiliki fitur keamanan yang baik.
 3. Memiliki fitur MVT sehingga mengajarkan bagaimana pengembangan web terorganisir.
 
