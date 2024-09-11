@@ -5,7 +5,8 @@ NPM : 2306162222
 
 Kelas : PBP E
 
-
+## Website Link
+https://ivan-jehuda-ivansbookstore.pbp.cs.ui.ac.id/
 
 ## Questions
 ### Step by step pembuatan Ivan's Book Store
@@ -31,10 +32,10 @@ Kelas : PBP E
 4. Menginisiasi proyek django baru dengan perintah
 `django-admin startproject ivans-book-store .`
 
-5. Membuat aplikasi baru bernama main dengan perintah
+5. Membuat aplikasi baru bernama main dengan perintah :
 `python manage.py startapp main`
 
-6. Membuat berkas template dalam main dan mengisinya dengan 
+6. Membuat berkas template dalam main dan mengisinya dengan :
     ```
     <h1>Ivan's Book Store</h1>
     <h5>NPM: </h5>
@@ -44,7 +45,7 @@ Kelas : PBP E
     <h5>Class: </h5>
     <p>{{ class }}<p>
     ```
-7. Membuat model product dengan memodifikasi berkas models.py dengan 
+7. Membuat model product dengan memodifikasi berkas models.py dengan :
     ```
     from django.db import models
 
@@ -74,7 +75,7 @@ Kelas : PBP E
 
 
 
-### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+### Diagram cara kerja Django
 
 ![Django Flow Chart](django_chart.png)
 
