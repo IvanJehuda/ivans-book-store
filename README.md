@@ -31,8 +31,8 @@ Kelas : PBP E
 4. Menginisiasi proyek django baru dengan perintah
 `django-admin startproject ivans-book-store .`
 
-5. Membuat aplikasi baru berenama main dengan perintah
-`django-admin startproject ivans-book-store .`
+5. Membuat aplikasi baru bernama main dengan perintah
+`python manage.py startapp main`
 
 6. Membuat berkas template dalam main dan mengisinya dengan 
     ```
