@@ -103,7 +103,7 @@ https://ivan-jehuda-ivansbookstore.pbp.cs.ui.ac.id/
 ### Mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
 Data sangat penting dalam sebuah platform karena beberapa alasan kunci:
 
-1. **Efisiensi dan Kinerja**: Data yang tepat waktu dan efisien memastikan bahwa pengguna dapat mengakses dan memanfaatkan platform tanpa delay yang signifikan. Ini mempengaruhi kinerja keseluruhan platform, kepuasan pengguna, dan skalabilitas, terutama dalam aplikasi waktu nyata seperti layanan streaming atau komputasi awan.
+1. **Efisiensi dan Kinerja**: Data yang tepat waktu dan efisien memastikan bahwa pengguna dapat mengakses dan memanfaatkan platform tanpa delay yang signifikan. Ini mempengaruhi kinerja keseluruhan platform, kepuasan pengguna, dan skalabilitas, terutama dalam aplikasi waktu nyata seperti layanan streaming atau cloud computing.
 
 2. **Pengalaman Pengguna**: Data delivery yang cepat dan dapat diandalkan secara langsung mempengaruhi pengalaman pengguna. Misalnya, di platform e-commerce, pengiriman data yang lambat dapat menyebabkan navigasi yang buruk dan membuat pengguna frustrasi, yang mungkin membuat mereka pergi.
 
@@ -118,11 +118,11 @@ Data sangat penting dalam sebuah platform karena beberapa alasan kunci:
 
 
 
-## Menurutmu, mana yang lebih baik antara XML dan JSON? Mengapa JSON lebih populer dibandingkan XML?
-Menurut saya, dalam hal format pertukaran data yang umum digunakan, saya memilih JSON untuk digunakan. Banyak aspek yang memengaruhi JSON lebih populer dari XML, seperti:
+### Menurutmu, mana yang lebih baik antara XML dan JSON? Mengapa JSON lebih populer dibandingkan XML?
+Menurut saya, dalam hal format data delivery yang umum digunakan, saya memilih JSON untuk digunakan. Banyak aspek yang memengaruhi JSON lebih populer dari XML, seperti:
 
 1. **Kesederhanaan**:
-   - JSON lebih ringan dan lebih mudah dibaca serta ditulis. Strukturnya lebih sederhana, menggunakan pasangan kunci-nilai.
+   - JSON lebih ringan dan lebih mudah dibaca serta ditulis. Strukturnya lebih sederhana, menggunakan pasangan key-value.
 
 2. **Keterbacaan**:
    - Format JSON lebih ringkas dan lebih mudah dibaca, terutama bagi para pengembang. Ini terintegrasi secara alami dengan JavaScript, yang menjadikannya ideal untuk aplikasi web.
@@ -136,13 +136,17 @@ Menurut saya, dalam hal format pertukaran data yang umum digunakan, saya memilih
 5. **Integrasi dengan JavaScript**:  
    - JSON berasal dari JavaScript, sehingga secara alami kompatibel dengan pengembangan web modern. JavaScript dapat dengan mudah mem-parsing JSON menggunakan `JSON.parse()` dan mengonversi objek menjadi JSON dengan `JSON.stringify()`.
 
-Untuk sebagian besar aplikasi web dan mobile modern, **JSON** lebih baik karena kesederhanaannya, kinerjanya, dan integrasi bawaan dengan JavaScript.
 
 
-## Fungsi dari method is_valid() pada form Django
+### Fungsi dari method `is_valid()` pada form Django
 Dalam Django, `is_valid()` adalah metode yang digunakan untuk memvalidasi data dalam formulir atau serializer. Ini memeriksa apakah data yang diberikan ke formulir atau serializer memenuhi aturan validasi yang ditetapkan untuk bidang yang sesuai. Metode ini mengembalikan True jika data valid dan False jika tidak. Selain itu, ketika `is_valid()` dipanggil, Django mengisi atribut errors dengan semua kesalahan validasi yang terjadi.
 
-## Step by Step Week 2
+### Pentingnya `crsf_token` dan bahaya penyerang
+Token Cross-Site Request Forgery melindungi aplikasi dari serangan Cross-Site Request Forgery. Dengan memiliki `csrf_token`, mereka dapat memastikan bahwa request POST berasal dari situs yang sah dan mencegah modifikasi data yang tidak sah melalui request palsu. Tanpa `csrf_token`, penyerang dapat membuat request palsu menggunakan nama pengguna yang sudah terotentikasi, mengubah data sensitif, atau mengakses informasi pribadi pengguna.
+
+Jika `csrf_token` tidak ada, penyerang akan membuat situs web berbahaya atau memodifikasi situs web yang sudah ada. Saat pengguna masuk ke aplikasi Django, mereka akan tanpa disadari mengakses situs berbahaya tersebut. Selanjutnya, situs berbahaya akan memuat form tersembunyi yang meminta aplikasi Django.
+
+## Step by Step Week 3
 1. Membuat berkas `base.html` dan emngisinya dengan
     ```python
     {% load static %}
@@ -328,14 +332,6 @@ Dalam Django, `is_valid()` adalah metode yang digunakan untuk memvalidasi data d
         </a>
         {% endblock content %}
     ```
-## Pentingnya crsf_TOKEN dan bahaya penyerang
-Token Cross-Site Request Forgery melindungi aplikasi dari serangan Cross-Site Request Forgery. Dengan memiliki csrf_token, mereka dapat memastikan bahwa request POST berasal dari situs yang sah dan mencegah modifikasi data yang tidak sah melalui request palsu. Tanpa csrf_token, penyerang dapat membuat request palsu menggunakan nama pengguna yang sudah terotentikasi, mengubah data sensitif, atau mengakses informasi pribadi pengguna.
-
-Jika csrf_token tidak ada, penyerang akan membuat situs web berbahaya atau memodifikasi situs web yang sudah ada. Saat pengguna masuk ke aplikasi Django, mereka akan tanpa disadari mengakses situs berbahaya tersebut. Selanjutnya, situs berbahaya akan memuat form tersembunyi yang meminta aplikasi Django.
-
-
-
-
 
 # Postman Screenshots
 ## a.  XML
