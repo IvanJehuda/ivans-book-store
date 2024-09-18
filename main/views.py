@@ -11,7 +11,7 @@ def show_main(request):
     context = {
         'appname' : 'ivans book store',
         'npm' : '2306123456',
-        'name': 'Pak Bepe',
+        'name': 'Ivan Jehuda Angi',
         'class': 'PBP E',
         'product_entries': product_entries
 
