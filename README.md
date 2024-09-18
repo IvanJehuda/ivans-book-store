@@ -345,7 +345,7 @@ Jika csrf_token tidak ada, penyerang akan membuat situs web berbahaya atau memod
 ![Postman](postmanJSON.png)
 
 ## c. XML by id
-![Postman](postmanXMLbyid.png)
+![Postman](postmanXMLbyID.png)
 
 ## d. JSON by id
-![Postman](postmanJSONbyid.png)
+![Postman](postmanJSONbyID.png)
