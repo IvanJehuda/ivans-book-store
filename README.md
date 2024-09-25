@@ -8,7 +8,14 @@ Kelas : PBP E
 ## Website Link
 https://ivan-jehuda-ivansbookstore.pbp.cs.ui.ac.id/
 
-## Questions
+## Markdown
+- [Tugas 1](#tugas-1)
+
+- [Tugas 2](#tugas-2)
+
+- [Tugas 3](#tugas-3)
+
+# Tugas-1
 ### Step by step pembuatan Ivan's Book Store
 
 1. Membuat direktori baru dengan nama `ivans-book-store`.
@@ -116,7 +123,7 @@ Data sangat penting dalam sebuah platform karena beberapa alasan kunci:
 
 
 
-
+# Tugas-2
 
 ### Menurutmu, mana yang lebih baik antara XML dan JSON? Mengapa JSON lebih populer dibandingkan XML?
 Menurut saya, dalam hal format data delivery yang umum digunakan, saya memilih JSON untuk digunakan. Banyak aspek yang memengaruhi JSON lebih populer dari XML, seperti:
@@ -345,3 +352,270 @@ Jika `csrf_token` tidak ada, penyerang akan membuat situs web berbahaya atau mem
 
 ## d. JSON by id
 ![Postman](postmanJSONbyID.png)
+
+# Tugas-3
+
+##  Menghubungkan `product` dengan  `user`
+ Dalam Django, model `Product` biasanya dihubungkan dengan model `User` menggunakan Foreign Key. Dengan adanya Foreign Key, setiap `Product` dapat terhubung ke pengguna tertentu yang telah login.
+
+Contoh model `Product`:
+```python
+from django.db import models
+import uuid
+from django.contrib.auth.models import User
+
+class ProductEntry(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    id = models.UUIDField(primary_key=True,default = uuid.uuid4, editable=False)
+    name = models.CharField(max_length=255)
+    price = models.IntegerField()
+    description = models.TextField()
+    time = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+```
+
+Cara kerja dalam menghubungkannya adalah dengan setiap kali pengguna membuat entry product, entry tersebut akan dikaitkan dengan `user` yang login. Lalu ForeignKey akan bermanfaat untuk membuat relasi many-to-one antara `Product` dengan `User`. Many-to-one memiliki arti bahwa setiap `user` dapat memiliki lebih dari satu entry `Product`. Lalu parameter `on_delete=models.Cascade` memiliki arti apabila `user` dihapus, maka semua entri `Product` yang berkaitan dengan `user` akan dihapus.
+## Cara Django mengingat pengguna yang login
+Django menggunakan kombinasi session dan cookies untuk mengingat pengguna yang telah login. Ketika pengguna berhasil login, Django akan membuat sebuah session unik dan menyimpan ID session ini dalam sebuah cookie di browser pengguna. Pada setiap permintaan selanjutnya, browser akan mengirimkan cookie ini kembali ke server, dan Django akan menggunakan ID session untuk mencari data pengguna yang sesuai di server. Selain untuk mengingat pengguna, cookies juga digunakan untuk personalisasi, pelacakan, dan otentikasi.
+
+## Authentication dan authorization
+**Authentication** adalah proses memverifikasi identitas pengguna (siapa kamu?), sedangkan **authorization** adalah proses menentukan hak akses pengguna (apa yang boleh kamu lakukan?).
+
+Implementasi di Django:
+
+- **Authentication**: Django menyediakan sistem authentication bawaan yang sangat fleksibel. Anda dapat menggunakan model User bawaan atau membuat model User custom untuk menyimpan informasi pengguna. Django juga menyediakan berbagai backend authentication untuk mendukung berbagai metode otentikasi seperti username/password, otentikasi sosial, dan lain-lain.
+
+- **Authorization**: Django mendukung konsep permission dan group untuk mengelola otorisasi. Permission adalah izin untuk melakukan tindakan tertentu (misalnya, menambahkan pengguna, mengubah postingan), sedangkan group adalah kumpulan pengguna yang memiliki permission yang sama. Anda dapat memberikan permission kepada group, dan kemudian menambahkan pengguna ke dalam group tersebut.
+
+
+## Perbedaan `HttpResponseRedirect()` and `redirect()`
+HttpResponseRedirect() dan redirect() adalah dua fungsi yang digunakan untuk mengalihkan pengguna ke URL yang berbeda di Django, tetapi keduanya memiliki cara yang sedikit berbeda dalam mencapainya:
+
+- `HttpResponseRedirect()` :Secara langsung membuat objek HttpResponse dengan kode status 302 (Ditemukan) dan header Lokasi yang menentukan URL baru.
+Lebih fleksibel karena memungkinkan Anda untuk menyesuaikan header respons dan atribut lain dari objek HttpResponse.
+- `redirect()` : Sebuah fungsi shortcut yang menyederhanakan proses pembuatan objek HttpResponseRedirect.
+Fungsi ini mengambil URL baru sebagai argumen dan secara otomatis membuat objek HttpResponse dengan kode status yang benar dan header Lokasi.
+
+## Step by step tugas 3
+1. Menambahkan import di `views.py` untuk keperluan register, login, dan logout.
+```python
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+```
+2. Membuat fitur register, login, dan logout
+```python
+def register(request):
+    form = UserCreationForm()
+
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your account has been successfully created!')
+            return redirect('main:login')
+    context = {'form':form}
+    return render(request, 'register.html', context)
+
+def login_user(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(data=request.POST)
+
+        if form.is_valid():
+                user = form.get_user()
+                login(request, user)
+                return redirect('main:show_main')
+
+    else:
+        form = AuthenticationForm(request)
+    context = {'form': form}
+    return render(request, 'login.html', context)
+
+def logout_user(request):
+    logout(request)
+    return redirect('main:login')
+```
+3. Membuat template baru sebagai tempat login bernama `login.html `, yang berisi :
+```python
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Login</title>
+{% endblock meta %}
+
+{% block content %}
+<div class="login">
+  <h1>Login</h1>
+
+  <form method="POST" action="">
+    {% csrf_token %}
+    <table>
+      {{ form.as_table }}
+      <tr>
+        <td></td>
+        <td><input class="btn login_btn" type="submit" value="Login" /></td>
+      </tr>
+    </table>
+  </form>
+
+  {% if messages %}
+  <ul>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %} Don't have an account yet?
+  <a href="{% url 'main:register' %}">Register Now</a>
+</div>
+
+{% endblock content %}
+```
+4. Membuat template baru sebagai tempat register bernama `register.html `, yang berisi :
+```python
+{% extends 'base.html' %}
+
+{% block meta %}
+<title>Register</title>
+{% endblock meta %}
+
+{% block content %}
+
+<div class="login">
+  <h1>Register</h1>
+
+  <form method="POST">
+    {% csrf_token %}
+    <table>
+      {{ form.as_table }}
+      <tr>
+        <td></td>
+        <td><input type="submit" name="submit" value="Daftar" /></td>
+      </tr>
+    </table>
+  </form>
+
+  {% if messages %}
+  <ul>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</div>
+
+{% endblock content %}
+```
+
+5. Menambahkan fuction untuk keperluan login, logout, dan register pada `views.py`
+```py
+def register(request):
+    form = UserCreationForm()
+
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your account has been successfully created!')
+            return redirect('main:login')
+    context = {'form':form}
+    return render(request, 'register.html', context)
+
+def login_user(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(data=request.POST)
+
+        if form.is_valid():
+                user = form.get_user()
+                login(request, user)
+                return redirect('main:show_main')
+
+    else:
+        form = AuthenticationForm(request)
+    context = {'form': form}
+    return render(request, 'login.html', context)
+
+def logout_user(request):
+    logout(request)
+    return redirect('main:login')
+```
+6. Melakukan routing pada `urls.py`
+```python
+from main.views import register, login_user, logout_user
+```
+
+```python
+urlpatterns = [
+...
+path('register/', register, name='register'),
+path('login/', login_user, name='login'),
+path('logout/', logout_user, name='logout'),
+]
+
+```
+7. Menghubungkan model `Product` dengan `User`.
+```python
+from django.contrib.auth.models import User
+
+class Product(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)    
+```
+
+8. Selanjutnya, pada `views.py`, saya melakukan perubahan pada fungsi `create_product()` dan `show_main()`
+```python
+@login_required(login_url='/login')
+def show_main(request):
+    product = Product.objects.filter(user=request.user)
+
+    context = {
+        'name': request.user.username,
+        ...
+    }
+
+def create_product_entry(request):
+    form = ProductForm(request.POST or None)
+
+    if form.is_valid() and request.method == "POST":
+        product_entry = form.save(commit=False)
+        product_entry.user = request.user
+        product_entry.save()
+        return redirect('main:show_main')
+
+    context = {'form': form}
+    return render(request, "create_product.html", context)
+```
+
+9.  Mengimpor hal-hal penting pada `views.py` untuk menampilkan detail informasi pengguna yang sedang _logged in_ seperti _username_ dan _last login_
+```python
+    import datetime
+    from django.http import HttpResponseRedirect
+    from django.urls import reverse
+```
+
+9. Menambahkan fungsionalitas _cookie_ pada fungsi `login_user`
+```python
+if form.is_valid():
+    user = form.get_user()
+    login(request, user)
+    response = HttpResponseRedirect(reverse("main:show_main"))
+    response.set_cookie('last_login', str(datetime.datetime.now()))
+    return response
+```
+
+10. Tambahkan `'last_login': request.COOKIES['last_login'],` pada fungsi `show_main`
+
+11.  Ubah fungsi `logout_user`
+```python
+def logout_user(request):
+    logout(request)
+    response = HttpResponseRedirect(reverse('main:login'))
+    response.delete_cookie('last_login')
+    return response
+```
+
+12 Modifikasi `main.html` untuk menambahkan informasi last login serta tombol logout.
+
+
+
+
