@@ -9,13 +9,13 @@ Kelas : PBP E
 https://ivan-jehuda-ivansbookstore.pbp.cs.ui.ac.id/
 
 ## Markdown
-- [Tugas 1](#tugas-1)
-
 - [Tugas 2](#tugas-2)
 
 - [Tugas 3](#tugas-3)
 
-# Tugas-1
+- [Tugas 4](#tugas-4)
+
+# Tugas-2
 ### Step by step pembuatan Ivan's Book Store
 
 1. Membuat direktori baru dengan nama `ivans-book-store`.
@@ -123,7 +123,7 @@ Data sangat penting dalam sebuah platform karena beberapa alasan kunci:
 
 
 
-# Tugas-2
+# Tugas-3
 
 ### Menurutmu, mana yang lebih baik antara XML dan JSON? Mengapa JSON lebih populer dibandingkan XML?
 Menurut saya, dalam hal format data delivery yang umum digunakan, saya memilih JSON untuk digunakan. Banyak aspek yang memengaruhi JSON lebih populer dari XML, seperti:
@@ -353,7 +353,7 @@ Jika `csrf_token` tidak ada, penyerang akan membuat situs web berbahaya atau mem
 ## d. JSON by id
 ![Postman](postmanJSONbyID.png)
 
-# Tugas-3
+# Tugas-4
 
 ##  Menghubungkan `product` dengan  `user`
  Dalam Django, model `Product` biasanya dihubungkan dengan model `User` menggunakan Foreign Key. Dengan adanya Foreign Key, setiap `Product` dapat terhubung ke pengguna tertentu yang telah login.
@@ -381,7 +381,7 @@ Cara kerja dalam menghubungkannya adalah dengan setiap kali pengguna membuat ent
 Django menggunakan kombinasi session dan cookies untuk mengingat pengguna yang telah login. Ketika pengguna berhasil login, Django akan membuat sebuah session unik dan menyimpan ID session ini dalam sebuah cookie di browser pengguna. Pada setiap permintaan selanjutnya, browser akan mengirimkan cookie ini kembali ke server, dan Django akan menggunakan ID session untuk mencari data pengguna yang sesuai di server. Selain untuk mengingat pengguna, cookies juga digunakan untuk personalisasi, pelacakan, dan otentikasi.
 
 ## Authentication dan authorization
-**Authentication** adalah proses memverifikasi identitas pengguna (siapa kamu?), sedangkan **authorization** adalah proses menentukan hak akses pengguna (apa yang boleh kamu lakukan?).
+**Authentication** adalah proses memverifikasi identitas pengguna , sedangkan **authorization** adalah proses menentukan hak akses pengguna.
 
 Implementasi di Django:
 
@@ -398,7 +398,7 @@ Lebih fleksibel karena memungkinkan Anda untuk menyesuaikan header respons dan a
 - `redirect()` : Sebuah fungsi shortcut yang menyederhanakan proses pembuatan objek HttpResponseRedirect.
 Fungsi ini mengambil URL baru sebagai argumen dan secara otomatis membuat objek HttpResponse dengan kode status yang benar dan header Lokasi.
 
-## Step by step tugas 3
+## Step by step tugas 4
 1. Menambahkan import di `views.py` untuk keperluan register, login, dan logout.
 ```python
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -437,7 +437,7 @@ def logout_user(request):
     logout(request)
     return redirect('main:login')
 ```
-3. Membuat template baru sebagai tempat login bernama `login.html `, yang berisi :
+3. Membuat template baru sebagai tempat login bernama `login.html`, yang berisi :
 ```python
 {% extends 'base.html' %}
 
@@ -472,7 +472,7 @@ def logout_user(request):
 
 {% endblock content %}
 ```
-4. Membuat template baru sebagai tempat register bernama `register.html `, yang berisi :
+4. Membuat template baru sebagai tempat register bernama `register.html`, yang berisi :
 ```python
 {% extends 'base.html' %}
 
