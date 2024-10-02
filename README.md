@@ -635,13 +635,13 @@ Prioritas selector CSS menentukan gaya mana yang diterapkan ketika beberapa atur
    ```
 
 3. **Selector ID** (misalnya, `#id`)  
-   - Lebih kuat dari selector kelas.  
+   - Lebih diprioritskan dari selector class.  
    ```css
    #header { color: green; }
    ```
 
 4. **inline style** (ditambahkan langsung dalam HTML, misalnya, `style="color: yellow;"`)  
-   - Lebih kuat dari selector ID.  
+   - Lebih diprioritaskan dari selector ID.  
    ```html
    <p style="color: yellow;">Hello</p>
    ```
@@ -656,7 +656,6 @@ Prioritas selector CSS menentukan gaya mana yang diterapkan ketika beberapa atur
 Jika terjadi konflik prioritas, aturan yang terakhir ditulis di file CSS yang akan digunakan.
 
 ## Mengapa responsive design penting
-Desain responsif sangat penting untuk beberapa alasan:
 
 1. **Pengalaman Pengguna yang Lebih Baik**: Ini memastikan bahwa situs web Anda terlihat dan berfungsi dengan baik di semua perangkat, dari desktop hingga smartphone, memberikan pengalaman yang mulus bagi pengguna.
 
@@ -668,7 +667,6 @@ Desain responsif sangat penting untuk beberapa alasan:
 
 5. **Future Proofing**: Seiring dengan dirilisnya perangkat baru dengan ukuran dan resolusi layar yang berbeda, desain responsif memastikan situs web Anda tetap dapat diakses dan berfungsi.
 
-Apakah Anda ingin tahu lebih banyak tentang cara menerapkan desain responsif di situs web Anda?
 
 Contoh aplikasi yang sudah menerapkan responsive design:
 - Google
@@ -678,7 +676,6 @@ Contoh aplikasi yang belum menerapkan responsive design:
 - SiakNG
 
 ## Margin, Padding, dan Border
-Tentu saja! Memahami Model Kotak CSS sangat penting untuk desain web. Berikut adalah penjelasan mengenai **margin**, **padding**, dan **border**:
 
 1. **Margin**:
    - **Definisi**: Ruang di luar batas suatu elemen.
@@ -699,14 +696,14 @@ Tentu saja! Memahami Model Kotak CSS sangat penting untuk desain web. Berikut ad
 ### Flexbox (Flexible Box Layout)
 Flexbox dirancang untuk **tata letak satu dimensi**. Ini unggul dalam mendistribusikan ruang sepanjang satu sumbu (baik secara horizontal maupun vertikal) dan menyelaraskan item di dalam sebuah wadah.
 
-#### Konsep Kunci:
-1. ** Flex Container**: Elemen induk yang menampung item-item fleksibel.
+#### Komponen:
+1. **Flex Container**: Elemen induk yang menampung item-item fleksibel.
    ```css
    .container {
      display: flex;
    }
    ```
-2. **Flex Itmes**: Elemen anak di dalam kontainer fleksibel.
+2. **Flex Items**: Elemen anak di dalam kontainer fleksibel.
 3. **Main Axis and Cross Axis**: Tata letak Flexbox didasarkan pada main axis (secara default adalah horizontal) dan cross axis. .
 4. **Properti Flex**:
    - `flex-direction`: Menentukan arah main axis (row, row-reverse, column, column-reverse).
@@ -717,7 +714,7 @@ Flexbox dirancang untuk **tata letak satu dimensi**. Ini unggul dalam mendistrib
 ### Grid (CSS Grid Layout)
 Grid dirancang untuk **tata letak dua dimensi**. Ini memungkinkan Anda untuk membuat tata letak yang kompleks dengan baris dan kolom.
 
-#### Konsep Utama:
+#### Komponen:
 1. **Kontainer Grid**: Elemen induk yang menampung item grid.
    ```css
    .grid-container {
@@ -728,7 +725,7 @@ Grid dirancang untuk **tata letak dua dimensi**. Ini memungkinkan Anda untuk mem
     ```
 2. **Item Grid**: Elemen anak di dalam  grid.
 
-3. **Grid lines**: Garis-garis yang membagi grid menjadi celss.
+3. **Grid lines**: Garis-garis yang membagi grid menjadi cells.
 4. **Properti Grid**:
    - `grid-template-columns` dan `grid-template-rows`: Menentukan struktur dari grid.
    - `grid-gap`: Mengatur jarak antara item grid.
@@ -825,7 +822,7 @@ Baik Flexbox maupun Grid dapat digunakan bersama untuk menciptakan desain yang s
     STATIC_ROOT = BASE_DIR / 'static' 
     ```
 8. Membuat `card_info.html` dan `card_product.html` sebagai wadah informasi di `main.html`
-7. Mengubah tampilan pada `login.html`, `edit_product.html` , `create_product_entry.html`, `register.html`, dan mengimplementasikan  `card_info.html` dan `card_product.html` pada `main.html` agar terlihat modern dan menjadi responsive.
+7. Mengubah tampilan pada `login.html`, `edit_product.html` , `create_product_entry.html`, `register.html`, dan mengimplementasikan  `card_info.html` dan `card_product.html` pada `main.html` agar terlihat modern dan menjadi responsive terhadap berbagai device.
 
 
 
