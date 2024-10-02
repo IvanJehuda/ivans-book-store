@@ -15,6 +15,8 @@ https://ivan-jehuda-ivansbookstore.pbp.cs.ui.ac.id/
 
 - [Tugas 4](#tugas-4)
 
+- [Tugas 5](#Tugas-5)
+
 # Tugas-2
 ### Step by step pembuatan Ivan's Book Store
 
@@ -615,6 +617,219 @@ def logout_user(request):
 ```
 
 12 Modifikasi `main.html` untuk menambahkan informasi last login serta tombol logout.
+
+# Tugas-5
+## Prioritas CSS Selector 
+Prioritas selector CSS menentukan gaya mana yang diterapkan ketika beberapa aturan menargetkan elemen yang sama. Berikut urutan prioritas dari yang terendah hingga tertinggi:
+
+1. **Selector element** (misalnya, `div`, `p`)  
+   - Prioritas terendah.  
+   ```css
+   p { color: red; }
+   ```
+
+2. **Selector class** (misalnya, `.nama-kelas`)  
+   - Lebih tinggi dari selector elemen.  
+   ```css
+   .alert { color: blue; }
+   ```
+
+3. **Selector ID** (misalnya, `#id`)  
+   - Lebih kuat dari selector kelas.  
+   ```css
+   #header { color: green; }
+   ```
+
+4. **inline style** (ditambahkan langsung dalam HTML, misalnya, `style="color: yellow;"`)  
+   - Lebih kuat dari selector ID.  
+   ```html
+   <p style="color: yellow;">Hello</p>
+   ```
+
+5. **Selector atribute**, **pseudo-class** (misalnya, `[type="text"]`, `:hover`)  
+   - Sama kuat dengan selector kelas.  
+   ```css
+   input[type="text"] { border: 1px solid black; }
+   ```
+
+
+Jika terjadi konflik prioritas, aturan yang terakhir ditulis di file CSS yang akan digunakan.
+
+## Mengapa responsive design penting
+Desain responsif sangat penting untuk beberapa alasan:
+
+1. **Pengalaman Pengguna yang Lebih Baik**: Ini memastikan bahwa situs web Anda terlihat dan berfungsi dengan baik di semua perangkat, dari desktop hingga smartphone, memberikan pengalaman yang mulus bagi pengguna.
+
+2. **Peningkatan Lalu Lintas Seluler**: Dengan semakin banyaknya pengguna seluler, memiliki situs web yang ramah seluler adalah hal yang penting. Desain responsif membantu menarik dan mempertahankan audiens ini.
+
+3. **SEO yang Lebih Baik**: Mesin pencari seperti Google memprioritaskan situs web yang ramah seluler dalam peringkat mereka. Desain responsif dapat meningkatkan visibilitas situs Anda dan peringkat di mesin pencari.
+
+4. **Hemat Biaya**: Alih-alih membuat situs web terpisah untuk perangkat yang berbeda, desain responsif memungkinkan Anda untuk mempertahankan satu situs yang dapat menyesuaikan dengan berbagai ukuran layar, menghemat waktu dan sumber daya.
+
+5. **Future Proofing**: Seiring dengan dirilisnya perangkat baru dengan ukuran dan resolusi layar yang berbeda, desain responsif memastikan situs web Anda tetap dapat diakses dan berfungsi.
+
+Apakah Anda ingin tahu lebih banyak tentang cara menerapkan desain responsif di situs web Anda?
+
+Contoh aplikasi yang sudah menerapkan responsive design:
+- Google
+- Youtube
+
+Contoh aplikasi yang belum menerapkan responsive design:
+- SiakNG
+
+## Margin, Padding, dan Border
+Tentu saja! Memahami Model Kotak CSS sangat penting untuk desain web. Berikut adalah penjelasan mengenai **margin**, **padding**, dan **border**:
+
+1. **Margin**:
+   - **Definisi**: Ruang di luar batas suatu elemen.
+   - **Tujuan**: Ini menciptakan space antara elemen dan elemen lain di sekitarnya.
+
+
+2. **Padding**:
+   - **Definisi**: Space antara konten suatu elemen dan batasnya.
+   - **Tujuan**: Ini menciptakan space di dalam elemen, antara konten dan border.
+   
+
+3. **Border**:
+   - **Definisi**: Garis yang mengelilingi padding dan konten dari sebuah elemen.
+   - **Tujuan**: Ini mendefinisikan batas elemen tersebut.
+
+## Grid Box and Flex Box
+
+### Flexbox (Flexible Box Layout)
+Flexbox dirancang untuk **tata letak satu dimensi**. Ini unggul dalam mendistribusikan ruang sepanjang satu sumbu (baik secara horizontal maupun vertikal) dan menyelaraskan item di dalam sebuah wadah.
+
+#### Konsep Kunci:
+1. ** Flex Container**: Elemen induk yang menampung item-item fleksibel.
+   ```css
+   .container {
+     display: flex;
+   }
+   ```
+2. **Flex Itmes**: Elemen anak di dalam kontainer fleksibel.
+3. **Main Axis and Cross Axis**: Tata letak Flexbox didasarkan pada main axis (secara default adalah horizontal) dan cross axis. .
+4. **Properti Flex**:
+   - `flex-direction`: Menentukan arah main axis (row, row-reverse, column, column-reverse).
+   - `justify-content`: Menyelaraskan item di sepanjang main axis (flex-start, flex-end, center, space-between, space-around).
+   - `align-items`: Menyelaraskan item di sepanjang cross axis (flex-start, flex-end, center, stretch).
+
+
+### Grid (CSS Grid Layout)
+Grid dirancang untuk **tata letak dua dimensi**. Ini memungkinkan Anda untuk membuat tata letak yang kompleks dengan baris dan kolom.
+
+#### Konsep Utama:
+1. **Kontainer Grid**: Elemen induk yang menampung item grid.
+   ```css
+   .grid-container {
+     display: grid;
+     grid-template-columns: ulangi(3, 1fr);
+     grid-template-rows: otomatis;
+   }
+    ```
+2. **Item Grid**: Elemen anak di dalam  grid.
+
+3. **Grid lines**: Garis-garis yang membagi grid menjadi celss.
+4. **Properti Grid**:
+   - `grid-template-columns` dan `grid-template-rows`: Menentukan struktur dari grid.
+   - `grid-gap`: Mengatur jarak antara item grid.
+   - `grid-area`: Menentukan posisi dan ukuran item grid dalam grid.
+
+
+### Kapan Menggunakan Flexbox vs. Grid
+- **Flexbox**: Lebih baik untuk tata letak dalam satu arah (e.g., navigation bars, aligning items dalam row and column).
+- **Grid**: Ideal untuk tata letak dua dimensi yang kompleks (e.g.,  web pages, dashboards).
+
+Baik Flexbox maupun Grid dapat digunakan bersama untuk menciptakan desain yang sangat responsif dan fleksibel.
+
+## Step by step Tugas 5
+1. Menambahkan dua function di `views.py`, yaitu `delete_product` dan `edit_product` yang bisa diterapkan pada setiap productnya.
+    ```python
+    
+    def edit_product(request, id):
+        # Get mood entry berdasarkan id
+        product = Product.objects.get(pk = id)
+
+        # Set mood entry sebagai instance dari form
+        form =ProductForm(request.POST or None, instance=product)
+
+        if form.is_valid() and request.method == "POST":
+            # Simpan form dan kembali ke halaman awal
+            form.save()
+            return HttpResponseRedirect(reverse('main:show_main'))
+
+        context = {'form': form}
+        return render(request, "edit_product.html", context)
+
+    def delete_product(request, id):
+        # Get mood berdasarkan id
+        product = Product.objects.get(pk = id)
+        # Hapus mood
+        product.delete()
+        # Kembali ke halaman awal
+        return HttpResponseRedirect(reverse('main:show_main
+    ```
+2. Melakukan routing dari kedua function ini ke `urls.py`
+    ```python
+        path('delete/<uuid:id>', delete_product, name='delete_product'),
+        path('edit-product/<uuid:id>', edit_product, name='edit_product'),
+    ```
+ 3. Memodifikasi `base.html` untuk tampilan responsive web design and tailwind css
+    ```python
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.tailwindcss.com"></script>
+    ```
+4. Membuat `global.css` untuk mengatur tampilan general dari web
+    ```css
+        .form-style form input, form textarea, form select {
+        font-family: 'Roboto', sans-serif;
+        width: 100%;
+        padding: 0.5rem;
+        border: 2px solid #bcbcbc;
+        border-radius: 0.375rem;
+        }
+        .form-style form input:focus, form textarea:focus, form select:focus {
+            outline: none;
+            border-color: #674ea7;
+            box-shadow: 0 0 0 3px #674ea7;
+        }
+
+
+        @keyframes gradient-animation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .animate-gradient {
+            background: linear-gradient(270deg, #4f46e1, #ec4899, #4f46e1); /* Adjust colors as needed */
+            background-size: 300% 300%; /* Adjust to change the speed */
+            animation: gradient-animation 5s ease infinite; /* Duration and easing */
+        }
+
+        ```
+5. Membuat `navbar.html` sebagai navigation bar, untuk 2 versi( desktop dan mobile viewing)
+6. Menambahkan path untuk ke static folder pada `settings.py`
+    ```python
+    STATIC_URL = '/static/'
+    if DEBUG:
+    STATICFILES_DIRS = [
+        BASE_DIR / 'static'
+    ]
+    else:
+    STATIC_ROOT = BASE_DIR / 'static' 
+    ```
+8. Membuat `card_info.html` dan `card_product.html` sebagai wadah informasi di `main.html`
+7. Mengubah tampilan pada `login.html`, `edit_product.html` , `create_product_entry.html`, `register.html`, dan mengimplementasikan  `card_info.html` dan `card_product.html` pada `main.html` agar terlihat modern dan menjadi responsive.
+
+
+
+
 
 
 

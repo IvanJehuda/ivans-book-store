@@ -1,0 +1,31 @@
+.form-style form input, form textarea, form select {
+    font-family: 'Roboto', sans-serif;
+    width: 100%;
+    padding: 0.5rem;
+    border: 2px solid #bcbcbc;
+    border-radius: 0.375rem;
+}
+.form-style form input:focus, form textarea:focus, form select:focus {
+    outline: none;
+    border-color: #674ea7;
+    box-shadow: 0 0 0 3px #674ea7;
+}
+
+
+@keyframes gradient-animation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.animate-gradient {
+    background: linear-gradient(270deg, #4f46e1, #ec4899, #4f46e1); /* Adjust colors as needed */
+    background-size: 300% 300%; /* Adjust to change the speed */
+    animation: gradient-animation 5s ease infinite; /* Duration and easing */
+}
