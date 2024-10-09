@@ -17,6 +17,8 @@ https://ivan-jehuda-ivansbookstore.pbp.cs.ui.ac.id/
 
 - [Tugas 5](#Tugas-5)
 
+- [Tugas 6](#Tugas-6)
+
 # Tugas-2
 ### Step by step pembuatan Ivan's Book Store
 
@@ -823,6 +825,149 @@ Baik Flexbox maupun Grid dapat digunakan bersama untuk menciptakan desain yang s
     ```
 8. Membuat `card_info.html` dan `card_product.html` sebagai wadah informasi di `main.html`
 7. Mengubah tampilan pada `login.html`, `edit_product.html` , `create_product_entry.html`, `register.html`, dan mengimplementasikan  `card_info.html` dan `card_product.html` pada `main.html` agar terlihat modern dan menjadi responsive terhadap berbagai device.
+
+# Tugas-6
+## Manfaat Javascript
+JavaScript memungkinkan developer membuat halaman web yang interaktif dan dinamis. JavaScript berjalan di browser pengguna (client-side), yang artinya pemrosesan dan interaksi dapat dilakukan langsung di perangkat pengguna tanpa perlu mengirim data ke server setiap saat. JavaScript juga memungkinkan pengiriman dan penerimaan data dari server tanpa memuat ulang halaman secara keseluruhan. Hal ini memungkingkan Javascript untuk membuat aplikasi yang lebih ringan.
+
+## Fungs `await` saat menggunakan `fetch()`
+ `await` dalam JavaScript digunakan di dalam fungsi `async` untuk menangani operasi asynchronous, seperti mengambil data dari API menggunakan fungsi `fetch()`. Dengan menggunakan `await`, kita dapat menghentikan eksekusi kode hingga promise yang dikembalikan oleh `fetch()` terpenuhi, memungkinkan struktur kode yang lebih mudah dibaca. Approach ini menyederhanakan penanganan kesalahan dengan `try...catch`, meningkatkan kejelasan kode secara keseluruhan dibandingkan dengan menggunakan `.then()` dan `.catch()` untuk pengelolaan promise.
+
+ Jika kita tidak menggunakan `await` atau metode lain untuk menangani promise (seperti `.then()`), JavaScript akan melanjutkan eksekusi kode berikutnya sebelum permintaan selesai. Ini berarti kode yang bergantung pada hasil dari `fetch()` (seperti data yang diambil dari server) bisa jadi dijalankan sebelum data yang diperlukan tersedia.
+
+
+## Alasan digunakannya decorator `crsf_exempt`
+ Django secara default memerlukan CSRF token untuk setiap permintaan POST. Namun, dalam kasus AJAX, Django tidak dapat membuat CSRF token secara otomatis, jadi kita harus menonaktifkan CSRF protection untuk tampilan tersebut.
+
+Dengan menggunakan decorator csrf_exempt, kami meminta Django untuk menghindari memeriksa CSRF token pada permintaan POST yang dikirimkan ke view tersebut. Ini memungkinkan kami untuk mengirimkan permintaan POST dari AJAX tanpa masalah.
+
+## Alasan validasi di back-end
+Pembersihan data di frontend hanya bersifat client-side dan dapat dengan mudah diubah dan di-bypass oleh penyerang. Pembersihan data di backend memastikan bahwa data yang diterima adalah valid dan aman untuk diproses, karena tidak bisa diubah oleh pengguna.
+
+Pembersihan data di backend memastikan bahwa semua data yang diterima oleh aplikasi telah melalui proses pembersihan yang sama, sehingga mengurangi kesalahan dan inkonsistensi.
+
+Pembersihan data di backend dapat digabungkan dengan validasi data untuk memastikan bahwa data yang diterima sesuai dengan aturan dan keamanan aplikasi.
+
+## Step by step tugas 6
+1. Membuat fungsi `add_product_entry_ajax` di `views.py`
+```python
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+
+...
+@csrf_exempt
+@require_POST
+def add_product_entry_ajax(request):
+    if not request.user.is_authenticated:
+        return HttpResponse(b"UNAUTHORIZED", status=401)
+
+    name = strip_tags(request.POST.get("name"))
+    price = request.POST.get("price")
+    description = strip_tags(request.POST.get("description"))  
+    genre = strip_tags(request.POST.get("genre"))
+    author = strip_tags(request.POST.get("author"))
+    user = request.user
+
+    new_product = Product(
+        name=name, 
+        price=price,
+        description=description,
+        genre=genre, 
+        author=author,
+        user=user  
+    )
+    new_product.save()
+
+    return HttpResponse(b"CREATED", status=201)
+```
+2. Melakukan routing terhadap fungsi `add_product_entry_ajax` di `urls.py`
+```python
+from main.views import ..., add_mood_entry_ajax
+
+...
+
+path('add-product-ajax/', add_product_entry_ajax, name='add_product_entry_ajax'),
+```
+3. Modifikasi fungsi `show_main` pada `views.py`
+```python
+def show_main(request):
+    context = {
+        'appname' : 'ivans book store',
+        'npm' : '2306123456',
+        'name': request.user.username,
+        'class': 'PBP E',
+        'last_login': request.COOKIES['last_login'],
+    }
+    return render(request, "main.html", context)
+```
+4. Modifikasi fungsi `show_json` dan `show_xml` pada `views.py`
+```python
+def show_xml(request):
+    data = Product.objects.filter(user=request.user)
+    return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+
+def show_json(request):
+    data = Product.objects.filter(user=request.user)
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+```
+
+5. Memodfikasi `forms.py` agar dapat membersihkan data dengan `strip_tags`
+```python
+from django.forms import ModelForm
+from main.models import Product
+from django.utils.html import strip_tags
+
+class ProductForm(ModelForm):
+    class Meta:
+        model = Product
+        fields = ["name", "price", "description", "genre", "author"]
+    def clean_name(self):
+        name = self.cleaned_data["name"]
+        return strip_tags(name)
+
+    def clean_genre(self):
+        genre = self.cleaned_data["genre"]
+        return strip_tags(genre)
+    def clean_description(self):
+        description = self.cleaned_data["description"]
+        return strip_tags(description)
+    def clean_author(self):
+        author = self.cleaned_data["author"]
+        return strip_tags(author)
+```
+6. Menambahkan script javascript baru pada `main.html` untuk menampilakn data produk, merefresh data produk, menambah data produk, serta melakukan pembersihan data.
+7. Tambahkan kode untuk mengaplikasikan tailwind pada aplikasi `Ivans-Book-Store` di `main.htnl`
+7. Mengganti bagian conditionals `main.html` untuk menampilkan data produk menjadi
+```py
+...
+<div id="mood_entry_cards"></div>
+...
+```
+8. Tambahkan tombol untuk menambahkan produk menggunakan AJAX
+```html
+...
+
+<button data-modal-target="crudModal" data-modal-toggle="crudModal" class="btn bg-indigo-700 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105" onclick="showModal();">
+    Add New Product Entry by AJAX
+</button>
+...
+```
+9. Terakhir menambahkan error masage pada `login_user` di `views.py`
+```py
+...
+if form.is_valid():
+    user = form.get_user()
+    login(request, user)
+    response = HttpResponseRedirect(reverse("main:show_main"))
+    response.set_cookie('last_login', str(datetime.datetime.now()))
+    return response
+else:
+    messages.error(request, "Invalid username or password. Please try again.")
+...
+```
+
+
+
 
 
 
